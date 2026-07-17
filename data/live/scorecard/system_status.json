@@ -1,0 +1,18 @@
+{
+  "status": "success",
+  "generated_at_local": "2026-07-17T15:01:12.887917+10:00",
+  "system_health": "healthy",
+  "system_health_label": "Operational",
+  "data_update_status": "success",
+  "forecast_publication_status": "success",
+  "latest_observation_local": "2026-07-17T14:00:00+10:00",
+  "data_age_hours": 1.02,
+  "history_coverage_percent": 100.0,
+  "missing_hourly_observations": 0,
+  "latest_published_forecast_date": "2026-07-15",
+  "latest_evaluated_forecast_date": "2026-07-14",
+  "forecast_id": "CCL-20260713",
+  "forecast_target_date": "2026-07-13",
+  "forecast_published_at_local": "2026-07-16T22:44:27.337737+10:00",
+  "notes": "System health reports operational status and data freshness. It is separate from forecast accuracy and decision quality."
+}

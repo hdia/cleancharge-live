@@ -1,0 +1,108 @@
+{
+  "status": "success",
+  "generated_at_local": "2026-07-17T15:01:12.877404+10:00",
+  "location": "Melbourne, Victoria, Australia",
+  "network": "NEM",
+  "network_region": "VIC1",
+  "operational_summary": {
+    "forecasts_published": 5,
+    "forecasts_evaluated": 4,
+    "forecasts_pending_evaluation": 1,
+    "first_published_forecast_date": "2026-07-11",
+    "latest_published_forecast_date": "2026-07-15",
+    "first_evaluated_forecast_date": "2026-07-11",
+    "latest_evaluated_forecast_date": "2026-07-14",
+    "current_streak_days": 5,
+    "longest_streak_days": 5
+  },
+  "scientific_performance": {
+    "mae_g_per_kwh": {
+      "count": 4,
+      "mean": 43.681,
+      "median": 38.813,
+      "minimum": 33.348,
+      "maximum": 63.752
+    },
+    "rmse_g_per_kwh": {
+      "count": 4,
+      "mean": 55.465,
+      "median": 51.575,
+      "minimum": 45.324,
+      "maximum": 73.385
+    },
+    "smape_percent": {
+      "count": 4,
+      "mean": 7.464,
+      "median": 6.687,
+      "minimum": 5.536,
+      "maximum": 10.948
+    },
+    "r2": {
+      "count": 4,
+      "mean": 0.084,
+      "median": 0.062,
+      "minimum": -0.447,
+      "maximum": 0.656
+    },
+    "bias_g_per_kwh": {
+      "count": 4,
+      "mean": 25.261,
+      "median": 27.75,
+      "minimum": -15.297,
+      "maximum": 60.842
+    },
+    "data_completeness_percent": {
+      "count": 4,
+      "mean": 100.0,
+      "median": 100.0,
+      "minimum": 100.0,
+      "maximum": 100.0
+    }
+  },
+  "decision_performance": {
+    "carbon_savings_capture_percent": {
+      "count": 4,
+      "mean": 84.748,
+      "median": 87.905,
+      "minimum": 68.84,
+      "maximum": 94.34
+    },
+    "timing_error_hours": {
+      "count": 4,
+      "mean": 1.5,
+      "median": 1.0,
+      "minimum": 1.0,
+      "maximum": 3.0
+    },
+    "window_overlap_percent": {
+      "count": 4,
+      "mean": 50.002,
+      "median": 66.67,
+      "minimum": 0.0,
+      "maximum": 66.67
+    },
+    "actual_emissions_following_recommendation_kg": {
+      "count": 4,
+      "mean": 9.934,
+      "median": 9.984,
+      "minimum": 9.107,
+      "maximum": 10.661
+    },
+    "perfect_hindsight_emissions_kg": {
+      "count": 4,
+      "mean": 9.353,
+      "median": 9.307,
+      "minimum": 8.769,
+      "maximum": 10.029
+    },
+    "exact_window_match_percent": 0.0,
+    "within_one_hour_percent": 75.0,
+    "average_stars": 4.0,
+    "grade_distribution": {
+      "A": 1,
+      "B": 2,
+      "C": 1
+    }
+  },
+  "interpretation_note": "Scientific accuracy and decision performance are reported separately. A forecast may have imperfect hourly accuracy while still identifying a useful low-carbon charging window."
+}

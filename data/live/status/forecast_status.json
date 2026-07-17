@@ -1,0 +1,40 @@
+{
+  "status": "success",
+  "forecast_id": "CCL-20260713",
+  "target_date": "2026-07-13",
+  "publication_type": "official_daily_forecast",
+  "published_at_local": "2026-07-16T22:44:27.337737+10:00",
+  "location": "Melbourne, Victoria, Australia",
+  "network": "NEM",
+  "network_region": "VIC1",
+  "model": "GradientBoostingRegressor",
+  "random_state": 42,
+  "training_history_start_local": "2026-04-16T07:00:00+10:00",
+  "training_history_end_local": "2026-07-12T23:00:00+10:00",
+  "training_observation_rows": 2105,
+  "design_rows": 2081,
+  "features": [
+    "hour_sin",
+    "hour_cos",
+    "dow_sin",
+    "dow_cos",
+    "intensity_lag_1h",
+    "intensity_lag_2h",
+    "intensity_lag_3h",
+    "intensity_lag_6h",
+    "intensity_lag_12h",
+    "intensity_lag_24h"
+  ],
+  "forecast_horizon_hours": 24,
+  "forecast_start_local": "2026-07-13T00:00:00+10:00",
+  "forecast_end_local": "2026-07-14T00:00:00+10:00",
+  "backtest_days": 7,
+  "backtest": {
+    "rows": 169,
+    "mae_g_per_kwh": 23.675,
+    "smape_percent": 3.333,
+    "r2": 0.9577
+  },
+  "archive_action": "preserved",
+  "archive_file": "C:\\CleanCharge\\cleancharge_GitHub_final\\data\\live\\forecasts\\archive\\2026-07-13.csv"
+}

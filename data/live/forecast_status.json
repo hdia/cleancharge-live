@@ -1,0 +1,42 @@
+{
+  "status": "success",
+  "generated_at_utc": "2026-07-11T10:38:31.743892+00:00",
+  "generated_at_local": "2026-07-11T20:38:31.743892+10:00",
+  "location": "Melbourne, Victoria, Australia",
+  "network": "NEM",
+  "network_region": "VIC1",
+  "model": "GradientBoostingRegressor",
+  "random_state": 42,
+  "training_history_start_local": "2026-04-12T10:00:00+10:00",
+  "training_history_end_local": "2026-07-11T10:00:00+10:00",
+  "training_observation_rows": 2161,
+  "design_rows": 2137,
+  "features": [
+    "hour_sin",
+    "hour_cos",
+    "dow_sin",
+    "dow_cos",
+    "intensity_lag_1h",
+    "intensity_lag_2h",
+    "intensity_lag_3h",
+    "intensity_lag_6h",
+    "intensity_lag_12h",
+    "intensity_lag_24h"
+  ],
+  "intensity_lags_hours": [
+    1,
+    2,
+    3,
+    6,
+    12,
+    24
+  ],
+  "forecast_horizon_hours": 24,
+  "backtest_days": 7,
+  "backtest": {
+    "rows": 169,
+    "mae_g_per_kwh": 23.858,
+    "smape_percent": 3.183,
+    "r2": 0.9466
+  }
+}

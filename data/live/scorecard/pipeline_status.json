@@ -1,0 +1,23 @@
+{
+  "status": "success",
+  "time_standard": "NEM time (UTC+10)",
+  "started_at_local": "2026-07-17T15:01:03.711312+10:00",
+  "today": "2026-07-17",
+  "yesterday": "2026-07-16",
+  "steps": {
+    "history_update": "success",
+    "yesterday_evaluation": "no_archived_forecast",
+    "today_publication": "skipped",
+    "scorecard": "success"
+  },
+  "data_availability": {
+    "history_file": "C:\\CleanCharge\\cleancharge-live\\data\\live\\vic_intensity_history.csv",
+    "history_available": true,
+    "latest_observation_nem": "2026-07-17T14:00:00+10:00",
+    "data_lag_minutes": 61.2,
+    "previous_day_complete": true,
+    "history_rows": 2161
+  },
+  "completed_at_local": "2026-07-17T15:01:12.953164+10:00",
+  "duration_seconds": 9.24
+}
