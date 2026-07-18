@@ -14,7 +14,9 @@ It is the live operational companion to the published [CleanCharge](https://gith
 
 ## Live dashboard
 
-[Open the CleanCharge Live dashboard](https://cleancharge-live.streamlit.app/)
+Try the CleanCharge Live dashboard:
+
+**https://cleancharge-live.streamlit.app/**
 
 ---
 
