@@ -1,17 +1,20 @@
+# sync_github.py
+
 """
 Synchronise the local CleanCharge Live repository with GitHub.
 
-Workflow:
-1. Display repository status.
-2. Stage all changes.
-3. Commit only when staged changes exist.
-4. Push the main branch to origin.
+The script:
+1. Checks that the configured folder is a Git repository.
+2. Detects local changes.
+3. Pulls remote changes before committing when the working tree is clean.
+4. Stages and commits local changes when present.
+5. Rebases onto the latest remote branch before pushing.
+6. Stops safely if a rebase conflict occurs.
+7. Pushes the synchronised branch to GitHub.
 
 Usage:
     python sync_github.py
-    python sync_github.py "Custom commit message"
-
-This script does not resolve merge conflicts automatically.
+    python sync_github.py "Describe the update"
 """
 
 from __future__ import annotations
@@ -23,18 +26,17 @@ from pathlib import Path
 from typing import Sequence
 
 REPO_DIR = Path(r"C:\CleanCharge\cleancharge-live")
-REMOTE = "origin"
 BRANCH = "main"
+REMOTE = "origin"
 
 
 def run_git(
-    arguments: Sequence[str],
+    args: Sequence[str],
     *,
-    capture_output: bool = False,
-    check: bool = False,
+    capture_output: bool = True,
 ) -> subprocess.CompletedProcess[str]:
     """Run a Git command in the configured repository."""
-    command = ["git", *arguments]
+    command = ["git", *args]
     print(f">> {' '.join(command)}")
 
     result = subprocess.run(
@@ -42,126 +44,150 @@ def run_git(
         cwd=REPO_DIR,
         text=True,
         capture_output=capture_output,
-        check=False,
+        shell=False,
     )
 
-    if capture_output:
-        if result.stdout:
-            print(result.stdout.rstrip())
-        if result.stderr:
-            print(result.stderr.rstrip(), file=sys.stderr)
+    if result.stdout:
+        print(result.stdout.rstrip())
 
-    if check and result.returncode != 0:
-        raise RuntimeError(
-            f"Git command failed with exit code {result.returncode}: "
-            f"{' '.join(command)}"
-        )
+    if result.stderr:
+        print(result.stderr.rstrip())
 
     return result
 
 
-def ensure_repository() -> None:
-    """Confirm that the configured folder is a Git repository."""
+def repository_is_valid() -> bool:
+    """Confirm that the configured directory exists and is a Git repository."""
     if not REPO_DIR.exists():
-        raise FileNotFoundError(
-            f"Repository directory does not exist: {REPO_DIR}"
-        )
+        print(f"\nRepository folder does not exist:\n{REPO_DIR}")
+        return False
 
-    result = run_git(
-        ["rev-parse", "--is-inside-work-tree"],
-        capture_output=True,
-    )
+    result = run_git(["rev-parse", "--is-inside-work-tree"])
+    return result.returncode == 0 and result.stdout.strip().lower() == "true"
 
-    if result.returncode != 0 or result.stdout.strip() != "true":
-        raise RuntimeError(
-            f"The configured folder is not a Git repository: {REPO_DIR}"
-        )
+
+def working_tree_status() -> str:
+    """Return porcelain-format Git status output."""
+    result = run_git(["status", "--short"])
+    if result.returncode != 0:
+        raise RuntimeError("Unable to read Git status.")
+    return result.stdout.strip()
 
 
 def remote_exists() -> bool:
-    """Return True when the configured remote exists."""
-    result = run_git(
-        ["remote", "get-url", REMOTE],
-        capture_output=True,
-    )
+    """Confirm that the configured remote exists."""
+    result = run_git(["remote", "get-url", REMOTE])
     return result.returncode == 0
 
 
-def staged_changes_exist() -> bool:
-    """Return True when staged changes are ready to commit."""
-    result = subprocess.run(
-        ["git", "diff", "--cached", "--quiet"],
-        cwd=REPO_DIR,
-        text=True,
-        check=False,
+def rebase_from_remote() -> bool:
+    """Fetch and rebase the local branch onto the remote branch."""
+    print("\nPulling the latest GitHub changes...")
+    result = run_git(["pull", "--rebase", REMOTE, BRANCH])
+
+    if result.returncode == 0:
+        print("Remote synchronisation completed successfully.")
+        return True
+
+    print(
+        "\nRebase did not complete. The script has stopped safely.\n"
+        "Review the conflict messages above. After resolving conflicts, run:\n\n"
+        "    git add <resolved-files>\n"
+        "    git rebase --continue\n\n"
+        "To abandon the rebase instead, run:\n\n"
+        "    git rebase --abort\n"
     )
-    return result.returncode == 1
+    return False
+
+
+def commit_local_changes(message: str) -> bool:
+    """Stage and commit local changes. Return True if a commit was created."""
+    status = working_tree_status()
+
+    if not status:
+        print("\nNo local changes to commit.")
+        return False
+
+    print("\nLocal changes detected. Staging files...")
+    if run_git(["add", "--all"]).returncode != 0:
+        raise RuntimeError("Unable to stage local changes.")
+
+    result = run_git(["commit", "-m", message])
+
+    if result.returncode == 0:
+        print("Local commit created successfully.")
+        return True
+
+    staged_check = run_git(["diff", "--cached", "--quiet"])
+    if staged_check.returncode == 0:
+        print("No commit was required.")
+        return False
+
+    raise RuntimeError("Git could not create the commit.")
+
+
+def push_to_github() -> bool:
+    """Push the configured branch to GitHub."""
+    print("\nPushing the synchronised branch to GitHub...")
+    result = run_git(["push", "-u", REMOTE, BRANCH])
+
+    if result.returncode == 0:
+        print("\nDone. CleanCharge Live is synchronised with GitHub.")
+        return True
+
+    print(
+        "\nPush failed. The remote branch may have changed again while the "
+        "script was running.\n"
+        "Run the script once more. It will pull and rebase before retrying."
+    )
+    return False
 
 
 def main() -> int:
-    """Stage, commit and push repository changes."""
+    """Synchronise the CleanCharge Live repository."""
+    commit_message = (
+        " ".join(sys.argv[1:]).strip()
+        or f"Update CleanCharge Live {datetime.now():%Y-%m-%d %H:%M:%S}"
+    )
+
+    print("\n==============================================")
+    print(" CleanCharge Live Git synchronisation")
+    print("==============================================")
+    print(f"\nRepository: {REPO_DIR}")
+    print(f"Branch: {BRANCH}")
+    print(f"Remote: {REMOTE}")
+
+    if not repository_is_valid():
+        print("\nThe configured folder is not a valid Git repository.")
+        return 1
+
+    if not remote_exists():
+        print(
+            f"\nGit remote '{REMOTE}' is not configured. "
+            "Add the GitHub remote before running this script."
+        )
+        return 1
+
     try:
-        ensure_repository()
+        initial_status = working_tree_status()
 
-        print()
-        print("==============================================")
-        print(" CleanCharge Live Git synchronisation")
-        print("==============================================")
-        print()
-        print(f"Repository: {REPO_DIR}")
-        print(f"Branch: {BRANCH}")
-        print()
-
-        run_git(["status", "--short"], capture_output=True)
-        run_git(["add", "--all"], check=True)
-
-        if staged_changes_exist():
-            if len(sys.argv) > 1:
-                commit_message = " ".join(sys.argv[1:]).strip()
-            else:
-                timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                commit_message = f"Update CleanCharge Live {timestamp}"
-
-            result = run_git(
-                ["commit", "-m", commit_message],
-                capture_output=True,
-            )
-
-            if result.returncode != 0:
-                print("\nCommit failed. No push was attempted.")
-                return result.returncode
-        else:
-            print("\nNo staged changes were found. Nothing to commit.")
-
-        if not remote_exists():
+        if initial_status:
             print(
-                "\nNo 'origin' remote is configured."
-                "\nCreate the GitHub repository, then run:"
-                "\n"
-                "\n  git remote add origin "
-                "https://github.com/hdia/cleancharge-live.git"
-                "\n  git push -u origin main"
+                "\nUncommitted local changes are present. "
+                "They will be committed before rebasing."
             )
+            commit_local_changes(commit_message)
+
+        if not rebase_from_remote():
             return 1
 
-        result = run_git(
-            ["push", "-u", REMOTE, BRANCH],
-            capture_output=True,
-        )
+        # Catch files created or modified during synchronisation.
+        commit_local_changes(commit_message)
 
-        if result.returncode != 0:
-            print(
-                "\nPush failed. The remote branch may contain changes "
-                "that are not present locally."
-                "\nReview the repository status before pulling or rebasing."
-            )
-            return result.returncode
+        return 0 if push_to_github() else 1
 
-        print("\nDone. CleanCharge Live is synchronised with GitHub.")
-        return 0
-
-    except (FileNotFoundError, RuntimeError) as exc:
-        print(f"\nError: {exc}", file=sys.stderr)
+    except RuntimeError as exc:
+        print(f"\nSynchronisation stopped: {exc}")
         return 1
 
 
