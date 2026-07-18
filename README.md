@@ -33,6 +33,12 @@ The system uses **NEM time, fixed UTC+10**, for operational scheduling and data-
 
 ---
 
+## 🚀 Live dashboard
+
+[Open the CleanCharge Live dashboard](https://cleancharge-live.streamlit.app/)
+
+---
+
 ## Relationship to the published CleanCharge study
 
 The original CleanCharge repository contains the reproducible workflow, archived study datasets, infrastructure and equity analysis, charging scenarios, figures, and CleanCharge Explorer dashboard.
