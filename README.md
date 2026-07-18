@@ -12,6 +12,12 @@ It is the live operational companion to the published [CleanCharge](https://gith
 
 ---
 
+## Live dashboard
+
+[Open the CleanCharge Live dashboard](https://cleancharge-live.streamlit.app/)
+
+---
+
 ## Overview
 
 CleanCharge Live:
@@ -30,12 +36,6 @@ CleanCharge Live:
 The system uses **NEM time, fixed UTC+10**, for operational scheduling and data-availability checks.
 
 > **Research and decision-support system.** Forecasts and recommendations are model based and should not be treated as guaranteed operational advice.
-
----
-
-## 🚀 Live dashboard
-
-[Open the CleanCharge Live dashboard](https://cleancharge-live.streamlit.app/)
 
 ---
 
