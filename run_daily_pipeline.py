@@ -62,7 +62,7 @@ PIPELINE_STATUS_FILE = (
     / "pipeline_status.json"
 )
 
-DEFAULT_LATEST_PUBLICATION_HOUR = 3
+DEFAULT_LATEST_PUBLICATION_HOUR = 8
 
 
 # ---------------------------------------------------------------------

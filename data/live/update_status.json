@@ -1,7 +1,12 @@
 {
   "status": "success",
+<<<<<<< HEAD
   "update_time_utc": "2026-07-19T00:08:04.932512+00:00",
   "update_time_local": "2026-07-19T10:08:04.932512+10:00",
+=======
+  "update_time_utc": "2026-07-19T00:49:59.978419+00:00",
+  "update_time_local": "2026-07-19T10:49:59.978419+10:00",
+>>>>>>> 5e98389 (Add temporary schedule test)
   "mode": "incremental update",
   "network": "NEM",
   "network_region": "VIC1",

@@ -1,6 +1,10 @@
 {
   "status": "success",
+<<<<<<< HEAD
   "generated_at_local": "2026-07-19T10:08:05.480691+10:00",
+=======
+  "generated_at_local": "2026-07-19T10:51:47.915189+10:00",
+>>>>>>> 5e98389 (Add temporary schedule test)
   "forecast_count": 4,
   "forecasts": [
     {
