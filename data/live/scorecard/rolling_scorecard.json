@@ -1,10 +1,6 @@
 {
   "status": "success",
-<<<<<<< HEAD
-  "generated_at_local": "2026-07-19T10:08:05.479873+10:00",
-=======
-  "generated_at_local": "2026-07-19T10:51:47.907366+10:00",
->>>>>>> 5e98389 (Add temporary schedule test)
+  "generated_at_local": "2026-07-19T11:03:14.278644+10:00",
   "location": "Melbourne, Victoria, Australia",
   "network": "NEM",
   "network_region": "VIC1",

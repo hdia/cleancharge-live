@@ -1,36 +1,23 @@
 {
   "status": "success",
   "time_standard": "NEM time (UTC+10)",
-<<<<<<< HEAD
-  "started_at_local": "2026-07-19T10:08:01.284319+10:00",
-=======
-  "started_at_local": "2026-07-19T10:49:49.105757+10:00",
->>>>>>> 5e98389 (Add temporary schedule test)
+  "started_at_local": "2026-07-19T11:03:09.560226+10:00",
   "today": "2026-07-19",
   "yesterday": "2026-07-18",
   "steps": {
     "history_update": "success",
     "yesterday_evaluation": "no_archived_forecast",
-    "today_publication": "late_success",
+    "today_publication": "already_published",
     "scorecard": "success"
   },
   "data_availability": {
-    "history_file": "C:\\CleanCharge\\cleancharge-live\\data\\live\\vic_intensity_history.csv",
+    "history_file": "/home/runner/work/cleancharge-live/cleancharge-live/data/live/vic_intensity_history.csv",
     "history_available": true,
     "latest_observation_nem": "2026-07-19T10:00:00+10:00",
-<<<<<<< HEAD
-    "data_lag_minutes": 8.1,
+    "data_lag_minutes": 63.2,
     "previous_day_complete": true,
     "history_rows": 2161
   },
-  "completed_at_local": "2026-07-19T10:08:05.536352+10:00",
-  "duration_seconds": 4.25
-=======
-    "data_lag_minutes": 50.0,
-    "previous_day_complete": true,
-    "history_rows": 2161
-  },
-  "completed_at_local": "2026-07-19T10:51:47.976815+10:00",
-  "duration_seconds": 118.87
->>>>>>> 5e98389 (Add temporary schedule test)
+  "completed_at_local": "2026-07-19T11:03:14.347469+10:00",
+  "duration_seconds": 4.79
 }

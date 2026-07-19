@@ -1,20 +1,12 @@
 {
   "status": "success",
-<<<<<<< HEAD
-  "generated_at_local": "2026-07-19T10:08:05.480722+10:00",
-=======
-  "generated_at_local": "2026-07-19T10:51:47.915221+10:00",
->>>>>>> 5e98389 (Add temporary schedule test)
+  "generated_at_local": "2026-07-19T11:03:14.279820+10:00",
   "system_health": "healthy",
   "system_health_label": "Operational",
   "data_update_status": "success",
   "forecast_publication_status": "success",
   "latest_observation_local": "2026-07-19T10:00:00+10:00",
-<<<<<<< HEAD
-  "data_age_hours": 0.13,
-=======
-  "data_age_hours": 0.86,
->>>>>>> 5e98389 (Add temporary schedule test)
+  "data_age_hours": 1.05,
   "history_coverage_percent": 100.0,
   "missing_hourly_observations": 0,
   "latest_published_forecast_date": "2026-07-19",

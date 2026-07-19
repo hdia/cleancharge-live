@@ -1,12 +1,7 @@
 {
   "status": "success",
-<<<<<<< HEAD
-  "update_time_utc": "2026-07-19T00:08:04.932512+00:00",
-  "update_time_local": "2026-07-19T10:08:04.932512+10:00",
-=======
-  "update_time_utc": "2026-07-19T00:49:59.978419+00:00",
-  "update_time_local": "2026-07-19T10:49:59.978419+10:00",
->>>>>>> 5e98389 (Add temporary schedule test)
+  "update_time_utc": "2026-07-19T01:03:13.589438+00:00",
+  "update_time_local": "2026-07-19T11:03:13.589438+10:00",
   "mode": "incremental update",
   "network": "NEM",
   "network_region": "VIC1",
@@ -14,7 +9,7 @@
   "interval": "1h",
   "fetch_hours_requested": 48,
   "history_days_retained": 90,
-  "latest_fetch_rows": 49,
+  "latest_fetch_rows": 48,
   "history": {
     "rows": 2161,
     "first_timestamp_utc": "2026-04-20T00:00:00+00:00",
