@@ -798,6 +798,14 @@ if page == "Today's forecast":
             """,
             unsafe_allow_html=True,
         )
+        
+        display_date = (
+            pd.Timestamp(target_date).strftime(
+                "%A %d %B %Y"
+            )
+            if target_date
+            else "Date not available"
+        )
 
         st.markdown(
             f"""
@@ -805,12 +813,22 @@ if page == "Today's forecast":
                 <div class="cc-hero-label">
                     Cleanest forecast charging window
                 </div>
+
+                <div style="
+                    color: #346247;
+                    font-size: 1.25rem;
+                    font-weight: 700;
+                    margin-bottom: 0.25rem;
+                ">
+                    {display_date}
+                </div>
+
                 <div class="cc-hero-value">
                     {fmt_time(best_start)} to {fmt_time(best_end)}
                 </div>
+
                 <div class="cc-hero-note">
-                    Official forecast <strong>{forecast_id}</strong>
-                    for {target_date or "the selected day"}.
+                    Official forecast <strong>{forecast_id}</strong>.
                     This is the lowest forecast carbon-intensity period
                     for the representative charging scenario.
                 </div>
