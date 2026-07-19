@@ -1,7 +1,7 @@
 {
   "status": "success",
-  "generated_at_local": "2026-07-19T11:27:44.980318+10:00",
-  "forecast_count": 5,
+  "generated_at_local": "2026-07-19T12:00:16.053780+10:00",
+  "forecast_count": 8,
   "forecasts": [
     {
       "forecast_id": "CCL-20260711",
@@ -102,6 +102,66 @@
       "data_completeness_percent": 100.0,
       "actual_emissions_following_recommendation_kg": 13.363,
       "perfect_hindsight_emissions_kg": 12.635
+    },
+    {
+      "forecast_id": "CCL-20260716",
+      "target_date": "2026-07-16",
+      "grade": "C",
+      "stars": 3,
+      "decision_quality_label": "Useful",
+      "carbon_savings_capture_percent": 73.37,
+      "timing_error_hours": 6.0,
+      "window_overlap_percent": 0.0,
+      "exact_window_match": false,
+      "within_one_hour": false,
+      "scientific_mae_g_per_kwh": 70.989,
+      "scientific_rmse_g_per_kwh": 83.767,
+      "scientific_smape_percent": 9.31,
+      "scientific_r2": -0.1972,
+      "scientific_bias_g_per_kwh": -68.481,
+      "data_completeness_percent": 100.0,
+      "actual_emissions_following_recommendation_kg": 15.573,
+      "perfect_hindsight_emissions_kg": 14.413
+    },
+    {
+      "forecast_id": "CCL-20260717",
+      "target_date": "2026-07-17",
+      "grade": "A+",
+      "stars": 5,
+      "decision_quality_label": "Excellent",
+      "carbon_savings_capture_percent": 97.67,
+      "timing_error_hours": 1.0,
+      "window_overlap_percent": 66.67,
+      "exact_window_match": false,
+      "within_one_hour": true,
+      "scientific_mae_g_per_kwh": 32.492,
+      "scientific_rmse_g_per_kwh": 38.251,
+      "scientific_smape_percent": 4.106,
+      "scientific_r2": 0.8903,
+      "scientific_bias_g_per_kwh": -28.301,
+      "data_completeness_percent": 100.0,
+      "actual_emissions_following_recommendation_kg": 13.73,
+      "perfect_hindsight_emissions_kg": 13.575
+    },
+    {
+      "forecast_id": "CCL-20260718",
+      "target_date": "2026-07-18",
+      "grade": "A+",
+      "stars": 5,
+      "decision_quality_label": "Excellent",
+      "carbon_savings_capture_percent": 95.42,
+      "timing_error_hours": 1.0,
+      "window_overlap_percent": 66.67,
+      "exact_window_match": false,
+      "within_one_hour": true,
+      "scientific_mae_g_per_kwh": 33.783,
+      "scientific_rmse_g_per_kwh": 40.952,
+      "scientific_smape_percent": 4.267,
+      "scientific_r2": 0.6959,
+      "scientific_bias_g_per_kwh": -27.644,
+      "data_completeness_percent": 100.0,
+      "actual_emissions_following_recommendation_kg": 14.583,
+      "perfect_hindsight_emissions_kg": 14.378
     }
   ]
 }
