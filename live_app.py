@@ -804,8 +804,12 @@ if page == "Today's forecast":
             <div class="cc-hero">
                 <div class="cc-hero-label">
                     Cleanest forecast charging window
-                </div>
+                </div>               
                 <div class="cc-hero-value">
+                    <span style="font-size:1.25rem;">
+                        {pd.Timestamp(target_date).strftime("%A %d %B %Y")}
+                    </span>
+                    <br>
                     {fmt_time(best_start)} to {fmt_time(best_end)}
                 </div>
                 <div class="cc-hero-note">
@@ -981,13 +985,32 @@ if page == "Today's forecast":
             <= now_local
             <= chart_data["local_time"].max()
         ):
-            figure.add_vline(
-                x=now_local,
-                line_dash="dash",
-                line_color="#555555",
-                annotation_text="Now",
-                annotation_position="top",
+
+
+            figure.add_shape(
+                type="line",
+                x0=now_local,
+                x1=now_local,
+                y0=0,
+                y1=1,
+                xref="x",
+                yref="paper",
+                line=dict(
+                    color="#555555",
+                    dash="dash",
+                ),
             )
+
+            figure.add_annotation(
+                x=now_local,
+                y=1,
+                xref="x",
+                yref="paper",
+                text="Now",
+                showarrow=False,
+                yshift=12,
+            )         
+
 
         figure.update_layout(
             height=500,
