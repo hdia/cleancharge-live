@@ -1296,12 +1296,12 @@ if page == "Today's forecast":
 elif page == "Forecast performance":
 
     st.header(
-        "Forecast performance"
+        "Performance evaluation"
     )
-
+    
     st.caption(
         "Transparent evaluation of scientific forecast accuracy, "
-        "charging-window decisions and environmental outcomes."
+        "recommendation performance and environmental outcomes."
     )
 
     operational = rolling_scorecard.get(
@@ -1356,8 +1356,8 @@ elif page == "Forecast performance":
                     "timing_error_hours",
                 )
             ),
-            "Average difference from the actual cleanest window start.",
-            "blue",
+            "Average difference between the recommended and actual lowest-carbon charging periods.",
+            "blue",            
         )
 
     with c4:
@@ -1414,12 +1414,13 @@ elif page == "Forecast performance":
 
             overlap_note = (
                 f"{overlap_display} of the "
-                f"{window_display} charging hours matched "
-                "the actual cleanest period."
+                f"{window_display} recommended charging hours "
+                "overlapped the actual lowest-carbon period."
             )
+            
         else:
-            overlap_note = (
-                "Overlap with the actual cleanest charging period."
+            overlap_note = (                
+                "Overlap between the recommended and actual lowest-carbon charging periods."
             )
 
         with report_left:
