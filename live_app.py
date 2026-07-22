@@ -803,7 +803,7 @@ if page == "Today's forecast":
             f"""
             <div class="cc-hero">
                 <div class="cc-hero-label">
-                    Cleanest forecast charging window
+                    Recommended Low-Carbon Charging Period
                 </div>               
                 <div class="cc-hero-value">
                     <span style="font-size:1.25rem;">
