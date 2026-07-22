@@ -815,8 +815,8 @@ if page == "Today's forecast":
                 <div class="cc-hero-note">
                     Official forecast <strong>{forecast_id}</strong>
                     for {target_date or "the selected day"}.
-                    This is the lowest forecast carbon-intensity period
-                    for the representative charging scenario.
+                    This is the forecast period expected to provide
+                    a low-carbon charging opportunity for the representative charging scenario.
                 </div>
             </div>
             """,
