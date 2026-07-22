@@ -1456,8 +1456,7 @@ elif page == "Forecast performance":
                 f"""                
 
                 **Scientific MAE:**  
-                {fmt_intensity(latest_evaluation.get('scientific_mae_g_per_kwh'))}  
-                Average absolute difference between the published and observed hourly carbon intensity.
+                {fmt_intensity(latest_evaluation.get('scientific_mae_g_per_kwh'))}: Average absolute difference between the published and observed hourly carbon intensity.
 
                 **Scientific RMSE:**  
                 {fmt_intensity(latest_evaluation.get('scientific_rmse_g_per_kwh'))}
