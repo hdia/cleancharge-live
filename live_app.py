@@ -644,7 +644,7 @@ page = st.sidebar.radio(
     "Navigation",
     [
         "Today's forecast",
-        "Forecast performance",
+        "Performance evaluation",
         "About",
     ],
 )
@@ -1437,12 +1437,16 @@ elif page == "Forecast performance":
                 {fmt_percent(latest_evaluation.get('carbon_savings_capture_percent'))}  
                 Captured {fmt_percent(latest_evaluation.get('carbon_savings_capture_percent'), decimals=0)} of the maximum possible emissions saving.
 
+                **Timing error:**  
+                {fmt_hours(latest_evaluation.get('timing_error_hours'))}  
+                Difference between the recommended and actual lowest-carbon charging periods.
+
                 **Window overlap:**  
                 {fmt_percent(latest_evaluation.get('window_overlap_percent'))}  
                 {overlap_note}
 
                 **Forecast identifier:**  
-                `{latest_evaluation.get('forecast_id', 'Not available')}`
+                `{latest_evaluation.get('forecast_id', 'Not available')}`                
                 """
             )
     
