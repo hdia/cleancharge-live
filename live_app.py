@@ -1670,24 +1670,36 @@ else:
         """
     )
 
-    st.markdown("## Why two kinds of evaluation?")
+
+    st.markdown("## Why two kinds of evaluation")
 
     st.markdown(
         """
-        **Scientific accuracy** evaluates how closely the hourly carbon
-        intensity values match actual observations. It includes MAE,
-        RMSE, sMAPE, R² and bias.
+        CleanCharge Live evaluates forecast performance in two complementary
+        ways.
 
-        **Recommendation quality** evaluates whether the forecast produced a
-        useful EV charging recommendation. It includes charging-window
-        timing error, overlap with the actual cleanest period and
-        Carbon Savings Capture.
+        **Scientific forecast accuracy** measures how closely the forecast
+        hourly carbon-intensity values match the actual observations. These
+        metrics include MAE, RMSE, sMAPE, R² and bias, and are commonly used
+        to assess forecasting models.
 
-        These measures are deliberately reported separately. A forecast
-        may overestimate absolute carbon intensity yet still identify a
-        highly effective low-carbon charging period.
+        **Recommendation quality** measures how useful the published
+        low-carbon charging recommendation was in practice. These metrics
+        include timing error, overlap with the actual lowest-carbon period,
+        and Carbon Savings Capture.
+
+        The two evaluations answer different questions.
+
+        - **Scientific forecast accuracy:** *How accurately did the model predict carbon intensity?*
+        - **Recommendation quality:** *How useful was the published charging recommendation?*
+
+        These measures are reported separately because a forecast does not
+        need to predict every hourly value perfectly to provide a highly
+        effective low-carbon charging recommendation.
         """
     )
+
+
 
     st.markdown("## Carbon Savings Capture")
 
@@ -1697,17 +1709,23 @@ else:
         emissions reduction was achieved by following the published
         recommendation.
 
-        - **100%** means the forecast selected the true optimal window.
-        - **90%** means it captured 90% of the saving available with
-          perfect hindsight.
+        It compares the emissions saving from the recommended charging
+        period with the maximum saving that could have been achieved using
+        perfect hindsight after the day has finished.
+
+        - **100%** indicates that the recommendation achieved the maximum
+          possible emissions reduction.
+        - **90%** indicates that it captured 90% of the maximum available
+          reduction.
         - Lower values indicate that part of the available opportunity
           was missed.
 
-        This provides an intuitive measure of practical usefulness while
-        conventional forecasting metrics remain available for scientific
-        assessment.
+        This metric reflects the practical value of the recommendation,
+        while the scientific forecasting metrics describe the accuracy of
+        the underlying forecast itself.
         """
-    )
+    )    
+    
 
     st.markdown("## Research reference")
 
