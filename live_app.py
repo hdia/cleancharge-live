@@ -814,7 +814,7 @@ if page == "Today's forecast":
                 </div>
                 <div class="cc-hero-note">
                     Official forecast <strong>{forecast_id}</strong>
-                    for {target_date or "the selected day"}.
+                    for {pd.Timestamp(target_date).strftime("%d %B %Y") if target_date else "the selected day"}.
                     This is the forecast period expected to provide
                     a low-carbon charging opportunity for the representative charging scenario.
                 </div>
@@ -827,13 +827,13 @@ if page == "Today's forecast":
 
         with c1:
             metric_card(
-                "Forecast window intensity",
+                "Forecast period intensity",
                 fmt_intensity(
                     recommendation.get(
                         "best_window_mean_intensity_g_per_kwh"
                     )
                 ),
-                "Mean forecast carbon intensity during the recommended window.",
+                "Mean forecast carbon intensity during the recommended period.",
                 "green",
             )
 
