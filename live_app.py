@@ -1230,7 +1230,7 @@ if page == "Today's forecast":
 
         with c1:
             metric_card(
-                "Decision quality",
+                "Recommendation Quality",
                 (
                     f"{stars_text(latest_evaluation.get('stars'))}"
                 ),
@@ -1278,7 +1278,7 @@ if page == "Today's forecast":
             )
 
         st.caption(
-            "Decision quality and scientific accuracy are reported "
+            "Recommendation quality and scientific accuracy are reported "
             "separately. A forecast may overestimate absolute carbon "
             "intensity while still identifying a useful charging window."
         )
@@ -1428,7 +1428,7 @@ elif page == "Forecast performance":
                 **Forecast date:**  
                 {pd.Timestamp(latest_evaluation.get('target_date')).strftime('%d %B %Y')}
 
-                **Decision quality:**  
+                **Recommendation quality:**  
                 {stars_text(latest_evaluation.get('stars'))}  
                 {latest_evaluation.get('grade', '')} | {latest_evaluation.get('decision_quality_label', '')}        
 
@@ -1678,7 +1678,7 @@ else:
         intensity values match actual observations. It includes MAE,
         RMSE, sMAPE, R² and bias.
 
-        **Decision quality** evaluates whether the forecast produced a
+        **Recommendation quality** evaluates whether the forecast produced a
         useful EV charging recommendation. It includes charging-window
         timing error, overlap with the actual cleanest period and
         Carbon Savings Capture.
