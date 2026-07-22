@@ -644,7 +644,7 @@ page = st.sidebar.radio(
     "Navigation",
     [
         "Today's forecast",
-        "Performance evaluation",
+        "Forecast performance",
         "About",
     ],
 )
