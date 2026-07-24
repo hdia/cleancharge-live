@@ -1,7 +1,7 @@
 {
   "status": "success",
-  "generated_at_local": "2026-07-24T08:15:31.273198+10:00",
-  "forecast_count": 13,
+  "generated_at_local": "2026-07-25T08:18:56.284383+10:00",
+  "forecast_count": 14,
   "forecasts": [
     {
       "forecast_id": "CCL-20260711",
@@ -262,6 +262,26 @@
       "data_completeness_percent": 100.0,
       "actual_emissions_following_recommendation_kg": 9.274,
       "perfect_hindsight_emissions_kg": 8.797
+    },
+    {
+      "forecast_id": "CCL-20260724",
+      "target_date": "2026-07-24",
+      "grade": "A+",
+      "stars": 5,
+      "decision_quality_label": "Excellent",
+      "carbon_savings_capture_percent": 100.0,
+      "timing_error_hours": 0.0,
+      "window_overlap_percent": 100.0,
+      "exact_window_match": true,
+      "within_one_hour": true,
+      "scientific_mae_g_per_kwh": 39.998,
+      "scientific_rmse_g_per_kwh": 50.779,
+      "scientific_smape_percent": 6.438,
+      "scientific_r2": 0.5593,
+      "scientific_bias_g_per_kwh": -22.795,
+      "data_completeness_percent": 100.0,
+      "actual_emissions_following_recommendation_kg": 9.694,
+      "perfect_hindsight_emissions_kg": 9.694
     }
   ]
 }
