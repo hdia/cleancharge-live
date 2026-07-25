@@ -644,7 +644,7 @@ page = st.sidebar.radio(
     "Navigation",
     [
         "Today's forecast",
-        "Forecast performance",
+        "Performance evaluation",
         "About",
     ],
 )
@@ -1293,7 +1293,7 @@ if page == "Today's forecast":
 # Page 2: Forecast performance
 # ---------------------------------------------------------------------
 
-elif page == "Forecast performance":
+elif page == "Performance evaluation":
 
     st.header(
         "Performance evaluation"
@@ -1439,7 +1439,7 @@ elif page == "Forecast performance":
 
                 **Timing error:**  
                 {fmt_hours(latest_evaluation.get('timing_error_hours'))}  
-                Difference between the recommended and actual lowest-carbon charging periods.
+                Difference between the start of the recommended charging period and the actual lowest-carbon charging period.
 
                 **Window overlap:**  
                 {fmt_percent(latest_evaluation.get('window_overlap_percent'))}  
