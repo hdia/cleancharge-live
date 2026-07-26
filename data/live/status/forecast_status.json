@@ -1,16 +1,16 @@
 {
   "status": "success",
-  "forecast_id": "CCL-20260726",
-  "target_date": "2026-07-26",
+  "forecast_id": "CCL-20260727",
+  "target_date": "2026-07-27",
   "publication_type": "official_daily_forecast",
-  "published_at_local": "2026-07-26T08:09:27.538185+10:00",
+  "published_at_local": "2026-07-27T08:11:47.668086+10:00",
   "location": "Melbourne, Victoria, Australia",
   "network": "NEM",
   "network_region": "VIC1",
   "model": "GradientBoostingRegressor",
   "random_state": 42,
-  "training_history_start_local": "2026-04-27T08:00:00+10:00",
-  "training_history_end_local": "2026-07-25T23:00:00+10:00",
+  "training_history_start_local": "2026-04-28T08:00:00+10:00",
+  "training_history_end_local": "2026-07-26T23:00:00+10:00",
   "training_observation_rows": 2152,
   "design_rows": 2128,
   "features": [
@@ -26,15 +26,15 @@
     "intensity_lag_24h"
   ],
   "forecast_horizon_hours": 24,
-  "forecast_start_local": "2026-07-26T00:00:00+10:00",
-  "forecast_end_local": "2026-07-27T00:00:00+10:00",
+  "forecast_start_local": "2026-07-27T00:00:00+10:00",
+  "forecast_end_local": "2026-07-28T00:00:00+10:00",
   "backtest_days": 7,
   "backtest": {
     "rows": 169,
-    "mae_g_per_kwh": 25.477,
-    "smape_percent": 3.865,
-    "r2": 0.9229
+    "mae_g_per_kwh": 26.749,
+    "smape_percent": 3.985,
+    "r2": 0.9192
   },
   "archive_action": "created",
-  "archive_file": "/home/runner/work/cleancharge-live/cleancharge-live/data/live/forecasts/archive/2026-07-26.csv"
+  "archive_file": "/home/runner/work/cleancharge-live/cleancharge-live/data/live/forecasts/archive/2026-07-27.csv"
 }
