@@ -679,7 +679,7 @@ st.title(
 
 st.caption(
     "Daily carbon-aware electric vehicle charging guidance for "
-    "Melbourne and Victoria"
+    "Victoria"
 )
 
 system_status_banner(
@@ -727,9 +727,9 @@ if page == "Today's forecast":
     ):
         st.warning(
             "The displayed forecast is an archived development forecast "
-            f"for {target_date}, not the current Melbourne date. "
+            f"for {target_date}, not the current forecast date. "
             "Once daily automation is enabled, this page will update "
-            "with the current official forecast."
+            "with the current published forecast."
         )
 
     best_start = recommendation.get(
@@ -801,26 +801,32 @@ if page == "Today's forecast":
 
         st.markdown(
             f"""
-            <div class="cc-hero">
-                <div class="cc-hero-label">
-                    Recommended Low-Carbon Charging Period
-                </div>               
-                <div class="cc-hero-value">
-                    <span style="font-size:1.25rem;">
-                        {pd.Timestamp(target_date).strftime("%A %d %B %Y")}
-                    </span>
-                    <br>
-                    {fmt_time(best_start)} to {fmt_time(best_end)}
-                </div>
-                <div class="cc-hero-note">
-                    Official forecast <strong>{forecast_id}</strong>
-                    for {pd.Timestamp(target_date).strftime("%d %B %Y") if target_date else "the selected day"}.
-                    This is the forecast period expected to provide
-                    a low-carbon charging opportunity for the representative charging scenario.
-                </div>
-            </div>
-            """,
+        <div class="cc-hero">
+        <div class="cc-hero-label">
+        Recommended Low-Carbon Charging Period
+        </div>
+        <div class="cc-hero-value">
+        <span style="font-size:1.25rem;">
+        {pd.Timestamp(target_date).strftime("%A %d %B %Y")}
+        </span>
+        <br>
+        {fmt_time(best_start)} to {fmt_time(best_end)}
+        </div>
+        <div class="cc-hero-note">
+        Published CleanCharge Live forecast
+        <strong>{forecast_id}</strong> for
+        {pd.Timestamp(target_date).strftime("%d %B %Y") if target_date else "the selected day"}.
+        This model-selected period is expected to provide
+        lower-emissions charging for the representative charging scenario.
+        </div>
+        </div>
+        """,
             unsafe_allow_html=True,
+        )
+
+        st.caption(
+            "The current public version displays one primary charging period. "
+            "Nearby start times may sometimes have similarly low forecast emissions."
         )
 
         c1, c2, c3, c4 = st.columns(4)
@@ -887,8 +893,8 @@ if page == "Today's forecast":
     st.markdown(
         """
         <div class="cc-section-note">
-        Hourly forecast carbon intensity for the official Melbourne
-        calendar-day forecast. The recommended charging window is shaded.
+        Hourly forecast carbon intensity for the published forecast day.
+        The selected low-carbon charging period is shaded.
         </div>
         """,
         unsafe_allow_html=True,
@@ -967,7 +973,7 @@ if page == "Today's forecast":
                     opacity=0.17,
                     line_width=0,
                     annotation_text=(
-                        "Recommended window"
+                        "     Low-carbon charging<br>period"
                     ),
                     annotation_position="top left",
                 )
@@ -1210,7 +1216,7 @@ if page == "Today's forecast":
         )
 
         st.caption(
-            f"These results evaluate the official forecast issued for "
+            f"These results evaluate the published CleanCharge Live forecast for "
             f"{report_date.strftime('%d %B %Y')} after the actual hourly "
             "electricity observations became available."
         )
@@ -1330,7 +1336,7 @@ elif page == "Performance evaluation":
                     0,
                 )
             ),
-            "Official daily forecasts with complete evaluation records.",
+            "Published daily forecasts with complete evaluation records.",
             "blue",
         )
 
@@ -1640,13 +1646,20 @@ else:
 
     st.markdown(
         """
-        **CleanCharge Live** is an open, transparent operational
-        forecasting service for emissions-aware electric vehicle
+        **CleanCharge Live** is an open operational research and
+        decision-support platform for emissions-aware electric vehicle
         charging in Victoria, Australia.
 
         It extends the methodology developed in the peer-reviewed
-        CleanCharge study and publishes one official forecast for each
-        Melbourne calendar day.
+        CleanCharge study by publishing a daily forecast of Victoria's
+        regional electricity carbon intensity and one model-selected
+        lower-carbon charging period for a representative charging
+        scenario.
+
+        CleanCharge Live v1 presents one primary charging period for
+        clarity. Nearby or alternative start times may sometimes have
+        similar forecast emissions, but they are not currently displayed
+        as separate recommendations.
         """
     )
 
@@ -1657,53 +1670,81 @@ else:
         1. Victoria-region electricity observations are retrieved from
            OpenElectricity.
 
-        2. A rolling 90-day hourly history is maintained.
+        2. A rolling 90-day hourly observation history is maintained and
+           checked for data completeness and freshness.
 
-        3. The forecasting model is retrained using information available
-           before the target day begins.
+        3. The forecasting model is retrained using only information
+           available before the target day begins.
 
-        4. A midnight-to-midnight carbon-intensity forecast is published
-           and assigned a permanent forecast identifier.
+        4. A daily carbon-intensity forecast is generated and assigned a
+           permanent CleanCharge Live forecast identifier.
 
-        5. The forecast is archived without being overwritten.
+        5. The model selects one lower-carbon charging period for the
+           representative 20 kWh charging session using a 7 kW charger.
 
-        6. Once actual observations become available, the forecast is
-           evaluated scientifically and operationally.
+        6. The published forecast is archived without being overwritten.
 
-        7. Rolling performance statistics are published transparently.
+        7. Once actual observations become available, both forecast
+           accuracy and recommendation quality are evaluated.
+
+        8. Rolling performance statistics and system-health information
+           are published transparently.
         """
     )
 
+    st.markdown("## What the daily guidance means")
+
+    st.markdown(
+        """
+        The displayed charging period is the contiguous period with the
+        lowest forecast mean carbon intensity for the representative
+        charging scenario.
+
+        It should be interpreted as:
+
+        - forecast-based guidance for regional Victorian grid conditions;
+        - one primary model-selected period rather than a guarantee that
+          nearby periods will be materially worse;
+        - a comparison between feasible charging periods within the
+          published daily forecast; and
+        - research-grade decision support rather than personalised or
+          guaranteed charging advice.
+
+        The recommendation does not account for an individual user's
+        electricity tariff, rooftop solar, household battery, vehicle
+        state of charge, departure time, charger availability or local
+        network conditions.
+        """
+    )
 
     st.markdown("## Why two kinds of evaluation")
 
     st.markdown(
         """
-        CleanCharge Live evaluates forecast performance in two complementary
-        ways.
+        CleanCharge Live evaluates performance in two complementary ways.
 
         **Scientific forecast accuracy** measures how closely the forecast
-        hourly carbon-intensity values match the actual observations. These
-        metrics include MAE, RMSE, sMAPE, R² and bias, and are commonly used
-        to assess forecasting models.
+        hourly carbon-intensity values match actual observations. Reported
+        measures include MAE, RMSE, sMAPE, R² and bias.
 
         **Recommendation quality** measures how useful the published
-        low-carbon charging recommendation was in practice. These metrics
-        include timing error, overlap with the actual lowest-carbon period,
-        and Carbon Savings Capture.
+        low-carbon charging period was once actual observations became
+        available. Reported measures include timing error, overlap with
+        the actual lowest-carbon period and Carbon Savings Capture.
 
         The two evaluations answer different questions.
 
-        - **Scientific forecast accuracy:** *How accurately did the model predict carbon intensity?*
-        - **Recommendation quality:** *How useful was the published charging recommendation?*
+        - **Scientific forecast accuracy:** *How accurately did the model
+          predict hourly carbon intensity?*
 
-        These measures are reported separately because a forecast does not
-        need to predict every hourly value perfectly to provide a highly
-        effective low-carbon charging recommendation.
+        - **Recommendation quality:** *How useful was the published
+          charging decision in practice?*
+
+        These measures are reported separately because a forecast can be
+        imperfect in absolute numerical terms while still identifying a
+        highly effective lower-carbon charging period.
         """
     )
-
-
 
     st.markdown("## Carbon Savings Capture")
 
@@ -1711,25 +1752,40 @@ else:
         """
         Carbon Savings Capture measures how much of the maximum possible
         emissions reduction was achieved by following the published
-        recommendation.
+        charging period.
 
-        It compares the emissions saving from the recommended charging
-        period with the maximum saving that could have been achieved using
-        perfect hindsight after the day has finished.
+        It compares the realised emissions saving from the recommendation
+        with the maximum saving that could have been achieved using
+        perfect hindsight after the day had finished.
 
-        - **100%** indicates that the recommendation achieved the maximum
-          possible emissions reduction.
-        - **90%** indicates that it captured 90% of the maximum available
+        - **100%** means the recommendation achieved the maximum possible
+          emissions reduction.
+
+        - **90%** means it captured 90% of the maximum available
           reduction.
-        - Lower values indicate that part of the available opportunity
-          was missed.
 
-        This metric reflects the practical value of the recommendation,
+        - Lower values mean that part of the available opportunity was
+          missed.
+
+        This metric reflects the practical value of the charging decision,
         while the scientific forecasting metrics describe the accuracy of
-        the underlying forecast itself.
+        the underlying forecast.
+        """
+    )
+
+    st.markdown("## Time convention")
+
+    st.markdown(
+        """
+        CleanCharge Live displays forecast dates and times in
+        **Melbourne local time** using the `Australia/Melbourne` timezone.
+
+        The applicable UTC offset changes automatically between Australian
+        Eastern Standard Time and Australian Eastern Daylight Time. Forecast
+        dates, charging periods and evaluation results should therefore be
+        interpreted using the Melbourne local times displayed by the platform.
         """
     )    
-    
 
     st.markdown("## Research reference")
 
@@ -1743,17 +1799,40 @@ else:
         """
     )
 
-    st.markdown("## Important limitations")
+    st.markdown("## Scope and limitations")
 
     st.markdown(
         """
-        - CleanCharge Live is a research and demonstration service.
-        - Forecasts are subject to uncertainty.
-        - The current implementation represents Victoria-region
-          electricity conditions.
-        - It does not account for household-specific tariffs, rooftop
-          solar, battery storage or network constraints.
-        - It should not be interpreted as guaranteed operational advice.
+        - CleanCharge Live is an operational research and demonstration
+          platform intended to support the exploration of emissions-aware
+          electric vehicle charging.
+
+        - Forecast outputs and the resulting charging guidance are subject
+          to model uncertainty, data limitations and unexpected changes in
+          electricity-system conditions.
+
+        - The current public implementation presents one primary
+          model-selected charging period rather than the full range of
+          potentially near-equivalent charging opportunities.
+
+        - The representative charging scenario assumes a 20 kWh energy
+          requirement and a 7 kW charger.
+
+        - Results reflect electricity-system conditions for Victoria as a whole,
+          as represented by the Victorian region of the National Electricity Market,
+          and should not be interpreted as charger-specific or household-specific electricity emissions.
+
+        - Household- and user-specific factors, including electricity
+          tariffs, rooftop solar generation, battery storage, local network
+          constraints, vehicle requirements and individual preferences, are
+          outside the scope of the current implementation.
+
+        - CleanCharge Live provides decision support only and does not
+          directly control, schedule or operate a vehicle or charging system.
+
+        - The published guidance should therefore be interpreted as
+          research-grade, forecast-based information rather than guaranteed
+          operational advice.
         """
     )
 

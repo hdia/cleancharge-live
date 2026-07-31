@@ -4,9 +4,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Status](https://img.shields.io/badge/status-operational-brightgreen.svg)](#system-status)
 
-**Real-time carbon-aware electric vehicle charging forecasts for Victoria, Australia.**
+**Daily carbon-aware electric vehicle charging guidance for Victoria, Australia.**
 
-CleanCharge Live is an operational research platform that retrieves recent Victorian electricity-system data, maintains a rolling observation history, forecasts grid carbon intensity, identifies lower-emissions electric vehicle charging windows, and evaluates its own performance over time.
+CleanCharge Live is an operational research and decision-support platform. It retrieves recent Victorian electricity-system data, maintains a rolling observation history, forecasts regional grid carbon intensity, publishes one lower-carbon charging period for a representative electric vehicle charging scenario, and evaluates its own performance as actual observations become available.
 
 It is the live operational companion to the published [CleanCharge](https://github.com/hdia/cleancharge) research toolkit.
 
@@ -25,27 +25,31 @@ Try the CleanCharge Live dashboard:
 CleanCharge Live:
 
 - retrieves hourly Victorian electricity and emissions data from OpenElectricity
-- maintains a rolling 90-day history with coverage checks
-- forecasts electricity carbon intensity for the next 24 hours
-- identifies a lower-emissions charging window
-- archives each published daily forecast
+- maintains a rolling 90-day observation history with coverage checks
+- forecasts regional electricity carbon intensity for the next operational day
+- publishes one model-selected lower-carbon charging period for a representative charging scenario
+- archives each formally published daily forecast without overwriting it
 - evaluates forecast accuracy when actual observations become available
-- evaluates the quality of the recommended charging decision
+- evaluates the realised quality of the published charging decision
 - maintains rolling performance scorecards
 - records operational health and data-freshness metadata
 - supports an interactive Streamlit dashboard
 
-The system uses **NEM time, fixed UTC+10**, for operational scheduling and data-availability checks.
+The current public implementation uses a representative **20 kWh charging session with a 7 kW charger**, requiring approximately three hourly forecast intervals.
 
-> **Research and decision-support system.** Forecasts and recommendations are model based and should not be treated as guaranteed operational advice.
+CleanCharge Live v1 displays one primary charging period for clarity. Adjacent or alternative start times may sometimes have similar forecast emissions, but they are not currently presented as separate recommendations.
+
+The operational pipeline uses the **Australia/Melbourne** timezone for forecast dates, publication, evaluation and dashboard display. The UTC offset therefore changes automatically between standard time and daylight saving time.
+
+> **Research and decision-support system.** Forecasts and charging guidance are model based, subject to uncertainty and not guaranteed operational advice.
 
 ---
 
 ## Relationship to the published CleanCharge study
 
-The original CleanCharge repository contains the reproducible workflow, archived study datasets, infrastructure and equity analysis, charging scenarios, figures, and CleanCharge Explorer dashboard.
+The original CleanCharge repository contains the reproducible research workflow, archived study datasets, infrastructure and equity analysis, charging scenarios, figures, and CleanCharge Explorer dashboard.
 
-This repository contains the operational forecasting system.
+This repository contains the operational forecasting and evaluation system developed as a live extension of that work.
 
 The scientific basis is described in:
 
@@ -63,10 +67,10 @@ OpenElectricity API
 Rolling Victorian observation history
         |
         v
-24-hour carbon-intensity forecast
+Daily carbon-intensity forecast
         |
         v
-Daily charging-window publication
+Published low-carbon charging period
         |
         +------------------------+
         |                        |
@@ -88,8 +92,25 @@ The daily orchestrator is `run_daily_pipeline.py`. It:
 
 1. updates the rolling observation history
 2. evaluates the previous day when an archived forecast is available
-3. publishes the current day's forecast
+3. publishes the current day's forecast and charging period
 4. rebuilds the rolling scorecard and system status
+
+Each published forecast is assigned a permanent identifier and retained for transparent later evaluation.
+
+---
+
+## What the charging recommendation means
+
+The displayed charging period is the contiguous period with the lowest forecast mean carbon intensity for the representative charging scenario.
+
+It should be interpreted as:
+
+- forecast-based guidance for regional Victorian grid conditions
+- a comparison between feasible charging periods within the published forecast
+- one primary model-selected period rather than a guarantee that nearby periods will be materially worse
+- a research demonstration rather than personalised charging advice
+
+The recommendation does not account for a user's tariff, rooftop solar, household battery, departure time, vehicle state of charge, charger availability or local network conditions.
 
 ---
 
@@ -100,7 +121,6 @@ cleancharge-live/
 |-- daily_update.py
 |-- live_app.py
 |-- run_daily_pipeline.py
-|-- sync_github.py
 |-- data/
 |   `-- live/
 |       |-- vic_intensity_history.csv
@@ -191,7 +211,7 @@ streamlit run live_app.py
 | `data/live/vic_latest_observations.csv` | Most recent retrieved observations |
 | `data/live/intensity_forecast_next24.csv` | Current model forecast |
 | `data/live/forecasts/today.csv` | Canonical published daily forecast |
-| `data/live/status/today_recommendation.json` | Current charging recommendation |
+| `data/live/status/today_recommendation.json` | Current model-selected charging period |
 | `data/live/validation/YYYY-MM-DD/` | Scientific and decision evaluation |
 | `data/live/scorecard/rolling_scorecard.json` | Longitudinal performance summary |
 | `data/live/scorecard/pipeline_status.json` | Latest pipeline run and data-freshness metadata |
@@ -203,11 +223,37 @@ streamlit run live_app.py
 
 CleanCharge Live evaluates both **prediction quality** and **decision quality**.
 
-Scientific evaluation compares forecast and observed carbon intensity using measures such as mean absolute error, root mean squared error and coefficient of determination.
+### Scientific forecast accuracy
 
-Decision evaluation examines whether the recommended charging window remained useful once actual observations became available, including carbon-savings capture and start-time error.
+Scientific evaluation measures how closely forecast hourly carbon-intensity values match actual observations. Reported measures include mean absolute error, root mean squared error, symmetric mean absolute percentage error, coefficient of determination and bias.
 
-This distinction matters because a forecast can be imperfect numerically while still supporting a good charging decision.
+It answers:
+
+> How accurately did the model predict hourly regional grid carbon intensity?
+
+### Recommendation quality
+
+Decision evaluation measures how useful the published charging period was after actual observations became available. Reported measures include timing error, overlap with the actual lowest-carbon period and Carbon Savings Capture.
+
+It answers:
+
+> How useful was the published charging decision in practice?
+
+These evaluations are reported separately because a forecast can be imperfect in absolute numerical terms while still identifying a highly effective lower-carbon charging period.
+
+---
+
+## Carbon Savings Capture
+
+Carbon Savings Capture measures how much of the maximum possible emissions reduction was achieved by following the published charging period.
+
+It compares the realised saving from the recommendation with the maximum saving that could have been achieved using perfect hindsight after the day had finished.
+
+- **100%** means the recommendation achieved the maximum possible reduction.
+- **90%** means it captured 90% of the maximum available reduction.
+- Lower values mean that part of the available opportunity was missed.
+
+This metric reflects the practical value of the decision, while the scientific forecast metrics describe the accuracy of the underlying forecast.
 
 ---
 
@@ -233,29 +279,18 @@ Never place the API key in source code, workflow files, committed data or docume
 
 ---
 
-## Manual Git synchronisation
-
-For normal local development:
-
-```powershell
-python sync_github.py
-```
-
-Optional custom commit message:
-
-```powershell
-python sync_github.py "Refine dashboard status panel"
-```
-
-The script stages, commits and pushes changes. It does not resolve merge conflicts automatically.
-
----
-
 ## Data timing and availability
 
-Operational timestamps are interpreted in **NEM time, UTC+10**. This avoids daylight-saving ambiguity in market-day processing and forecast publication.
+Forecast dates, charging periods and evaluation results are expressed in
+**Melbourne local time** using the `Australia/Melbourne` timezone.
 
-Data availability can vary, so each pipeline run records the latest observation timestamp and observed data lag rather than assuming a fixed delay.
+The UTC offset changes automatically between Australian Eastern Standard
+Time and Australian Eastern Daylight Time. This keeps the published forecast
+day aligned with the local Melbourne calendar throughout the year.
+
+Data availability can vary, so each pipeline run records the latest
+observation timestamp and observed data lag rather than assuming a fixed
+delay.
 
 ---
 
@@ -301,10 +336,12 @@ CleanCharge Live currently:
 
 - focuses on Victoria, Australia
 - uses hourly regional electricity-system observations
-- forecasts regional grid carbon intensity rather than charger-specific electricity supply
+- publishes one primary charging period for a representative 20 kWh, 7 kW charging scenario
+- forecasts regional grid carbon intensity rather than charger-specific or household-specific electricity supply
 - does not control a vehicle or charger directly
-- does not account for every tariff, network constraint, battery-management rule or user preference
+- does not account for every tariff, rooftop-solar profile, battery system, network constraint, battery-management rule or user preference
 - depends on the continued availability and structure of the OpenElectricity API
+- may be affected by forecast error, delayed data, missing observations, software faults or unusual electricity-system conditions
 - should be interpreted as research-grade decision support
 
 ---
@@ -340,7 +377,7 @@ Original research software:
 Dia, H. (2025). *CleanCharge analysis and forecasting toolkit.* Zenodo.  
 https://doi.org/10.5281/zenodo.17232338
 
-A separate citation can be added after the first formal CleanCharge Live release.
+A separate citation can be added after the first formal CleanCharge Live software release.
 
 ---
 
@@ -348,7 +385,7 @@ A separate citation can be added after the first formal CleanCharge Live release
 
 CleanCharge Live is an open-source research project for research, education, reproducibility and exploration of emissions-aware electric vehicle charging.
 
-Forecasts and recommendations may be affected by delayed or missing data, model error, unusual electricity-system conditions, software faults or upstream service changes. Users remain responsible for charging safety, electricity costs, vehicle and charger compatibility, and compliance with applicable requirements.
+Forecasts and charging guidance may be affected by delayed or missing data, model error, unusual electricity-system conditions, software faults or upstream service changes. Users remain responsible for charging safety, electricity costs, vehicle and charger compatibility, and compliance with applicable requirements.
 
 ---
 

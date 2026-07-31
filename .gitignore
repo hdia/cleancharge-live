@@ -46,3 +46,11 @@ src_file_list*.txt
 
 # Local scratch outputs
 results/
+
+# Local development and superseded files
+/ss/
+/v2/
+
+# Local repository-management and maintenance utilities
+/sync_github.py
+/backfill_missing_dates.py
