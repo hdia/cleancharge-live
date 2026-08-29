@@ -4,7 +4,9 @@ on:
   workflow_dispatch:
 
   schedule:
-    - cron: '15 21 * * *'    
+    - cron: '15 21 * * *'
+    - cron: '45 21 * * *'
+    - cron: '15 22 * * *'
 
 permissions:
   contents: write
@@ -61,3 +63,21 @@ jobs:
 
           git commit -m "Automated CleanCharge Live update $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push origin HEAD:main
+
+      - name: Verify today's forecast publication
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('data/live/scorecard/pipeline_status.json')
+          status = json.loads(path.read_text(encoding='utf-8'))
+          publication = status.get('steps', {}).get('today_publication')
+
+          if publication not in {'success', 'already_published'}:
+              raise SystemExit(
+                  f"Forecast publication did not complete successfully: {publication}"
+              )
+
+          print(f"Forecast publication status: {publication}")
+          PY
