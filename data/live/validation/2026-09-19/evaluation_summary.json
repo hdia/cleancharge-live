@@ -1,0 +1,23 @@
+{
+  "status": "success",
+  "forecast_id": "CCL-20260919",
+  "target_date": "2026-09-19",
+  "evaluation_window_hours": 3,
+  "window_overlap_hours": 1.0,
+  "grade": "A",
+  "stars": 5,
+  "decision_quality_label": "Excellent",
+  "carbon_savings_capture_percent": 97.55,
+  "timing_error_hours": 2.0,
+  "window_overlap_percent": 33.33,
+  "exact_window_match": false,
+  "within_one_hour": false,
+  "actual_emissions_following_recommendation_kg": 6.059,
+  "perfect_hindsight_emissions_kg": 5.849,
+  "scientific_mae_g_per_kwh": 61.271,
+  "scientific_rmse_g_per_kwh": 72.192,
+  "scientific_smape_percent": 14.196,
+  "scientific_r2": 0.7216,
+  "scientific_bias_g_per_kwh": 19.048,
+  "data_completeness_percent": 100.0
+}
