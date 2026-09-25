@@ -1,58 +1,58 @@
 {
   "status": "success",
-  "generated_at_local": "2026-09-25T09:53:40.979475+10:00",
+  "generated_at_local": "2026-09-26T05:16:01.700323+10:00",
   "location": "Melbourne, Victoria, Australia",
   "network": "NEM",
   "network_region": "VIC1",
   "operational_summary": {
-    "forecasts_published": 72,
-    "forecasts_evaluated": 71,
+    "forecasts_published": 73,
+    "forecasts_evaluated": 72,
     "forecasts_pending_evaluation": 1,
     "first_published_forecast_date": "2026-07-11",
-    "latest_published_forecast_date": "2026-09-25",
+    "latest_published_forecast_date": "2026-09-26",
     "first_evaluated_forecast_date": "2026-07-11",
-    "latest_evaluated_forecast_date": "2026-09-24",
-    "current_streak_days": 26,
+    "latest_evaluated_forecast_date": "2026-09-25",
+    "current_streak_days": 27,
     "longest_streak_days": 27
   },
   "scientific_performance": {
     "mae_g_per_kwh": {
-      "count": 71,
-      "mean": 85.936,
-      "median": 70.989,
+      "count": 72,
+      "mean": 86.75,
+      "median": 71.141,
       "minimum": 26.803,
       "maximum": 281.515
     },
     "rmse_g_per_kwh": {
-      "count": 71,
-      "mean": 102.288,
-      "median": 89.399,
+      "count": 72,
+      "mean": 103.211,
+      "median": 89.999,
       "minimum": 34.755,
       "maximum": 292.764
     },
     "smape_percent": {
-      "count": 71,
-      "mean": 13.633,
-      "median": 10.915,
+      "count": 72,
+      "mean": 13.712,
+      "median": 10.931,
       "minimum": 3.448,
       "maximum": 50.854
     },
     "r2": {
-      "count": 71,
-      "mean": -0.183,
-      "median": 0.402,
+      "count": 72,
+      "mean": -0.192,
+      "median": 0.396,
       "minimum": -10.657,
       "maximum": 0.89
     },
     "bias_g_per_kwh": {
-      "count": 71,
-      "mean": 33.818,
-      "median": 19.048,
+      "count": 72,
+      "mean": 31.791,
+      "median": 17.952,
       "minimum": -134.249,
       "maximum": 281.515
     },
     "data_completeness_percent": {
-      "count": 71,
+      "count": 72,
       "mean": 100.0,
       "median": 100.0,
       "minimum": 100.0,
@@ -61,47 +61,47 @@
   },
   "decision_performance": {
     "carbon_savings_capture_percent": {
-      "count": 71,
-      "mean": 95.111,
-      "median": 97.76,
+      "count": 72,
+      "mean": 95.031,
+      "median": 97.715,
       "minimum": 68.84,
       "maximum": 100.0
     },
     "timing_error_hours": {
-      "count": 71,
-      "mean": 1.845,
+      "count": 72,
+      "mean": 1.847,
       "median": 1.0,
       "minimum": 0.0,
       "maximum": 12.0
     },
     "window_overlap_percent": {
-      "count": 71,
-      "mean": 59.156,
+      "count": 72,
+      "mean": 58.797,
       "median": 66.67,
       "minimum": 0.0,
       "maximum": 100.0
     },
     "actual_emissions_following_recommendation_kg": {
-      "count": 71,
-      "mean": 10.335,
-      "median": 10.199,
+      "count": 72,
+      "mean": 10.374,
+      "median": 10.297,
       "minimum": 5.864,
       "maximum": 15.573
     },
     "perfect_hindsight_emissions_kg": {
-      "count": 71,
-      "mean": 10.077,
-      "median": 10.029,
+      "count": 72,
+      "mean": 10.108,
+      "median": 10.04,
       "minimum": 5.744,
       "maximum": 14.524
     },
-    "exact_window_match_percent": 25.35,
-    "within_one_hour_percent": 70.42,
-    "average_stars": 4.704,
+    "exact_window_match_percent": 25.0,
+    "within_one_hour_percent": 69.44,
+    "average_stars": 4.694,
     "grade_distribution": {
       "A": 13,
       "A+": 41,
-      "B": 13,
+      "B": 14,
       "C": 4
     }
   },
