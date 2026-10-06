@@ -107,14 +107,14 @@ def ensure_local_time(df: pd.DataFrame) -> pd.DataFrame:
     Standardise the input to an hourly Melbourne-time series.
 
     Accepted time columns:
-    - local_time
     - ts
+    - local_time
     - timestamp
     - datetime
     - time
     - date
 
-    If 'ts' is used, it is interpreted as UTC.
+    If 'ts' is available, it is preferred and interpreted as UTC.
     Other naive timestamps are interpreted as Melbourne local time.
     """
     if df.empty:
@@ -125,8 +125,8 @@ def ensure_local_time(df: pd.DataFrame) -> pd.DataFrame:
     source_col = None
 
     for candidate in [
-        "local_time",
         "ts",
+        "local_time",
         "timestamp",
         "datetime",
         "time",
@@ -139,7 +139,7 @@ def ensure_local_time(df: pd.DataFrame) -> pd.DataFrame:
     if source_col is None:
         raise ValueError(
             "Could not identify a time column. Expected one of: "
-            "local_time, ts, timestamp, datetime, time or date."
+            "ts, local_time, timestamp, datetime, time or date."
         )
 
     if source_col == "ts":
