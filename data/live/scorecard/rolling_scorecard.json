@@ -1,18 +1,18 @@
 {
   "status": "success",
-  "generated_at_local": "2026-10-07T11:02:35.776649+11:00",
+  "generated_at_local": "2026-10-08T07:46:49.886242+11:00",
   "location": "Melbourne, Victoria, Australia",
   "network": "NEM",
   "network_region": "VIC1",
   "operational_summary": {
-    "forecasts_published": 80,
+    "forecasts_published": 81,
     "forecasts_evaluated": 80,
-    "forecasts_pending_evaluation": 0,
+    "forecasts_pending_evaluation": 1,
     "first_published_forecast_date": "2026-07-11",
-    "latest_published_forecast_date": "2026-10-03",
+    "latest_published_forecast_date": "2026-10-08",
     "first_evaluated_forecast_date": "2026-07-11",
     "latest_evaluated_forecast_date": "2026-10-03",
-    "current_streak_days": 34,
+    "current_streak_days": 1,
     "longest_streak_days": 34
   },
   "scientific_performance": {
