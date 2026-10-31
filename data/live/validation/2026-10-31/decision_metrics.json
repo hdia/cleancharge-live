@@ -1,0 +1,64 @@
+{
+  "status": "success",
+  "forecast_id": "CCL-20261031",
+  "target_date": "2026-10-31",
+  "evaluation_type": "decision_quality",
+  "location": "Melbourne, Victoria, Australia",
+  "need_kwh": 20.0,
+  "charger_kw": 7.0,
+  "exact_duration_hours": 2.857,
+  "evaluation_window_hours": 3,
+  "forecast_recommended_window": {
+    "start_local": "2026-10-31T11:00:00+11:00",
+    "end_local": "2026-10-31T14:00:00+11:00",
+    "forecast_mean_intensity_g_per_kwh": 424.005,
+    "forecast_expected_emissions_kg": 8.48,
+    "actual_mean_intensity_g_per_kwh": 559.54,
+    "actual_emissions_kg": 11.191
+  },
+  "actual_cleanest_window": {
+    "start_local": "2026-10-31T13:00:00+11:00",
+    "end_local": "2026-10-31T16:00:00+11:00",
+    "mean_intensity_g_per_kwh": 451.374,
+    "emissions_kg": 9.027
+  },
+  "actual_highest_intensity_window": {
+    "start_local": "2026-10-31T03:00:00+11:00",
+    "end_local": "2026-10-31T06:00:00+11:00",
+    "mean_intensity_g_per_kwh": 736.416,
+    "emissions_kg": 14.728
+  },
+  "immediate_charging_baseline": {
+    "start_local": "2026-10-31T00:00:00+11:00",
+    "end_local": "2026-10-31T03:00:00+11:00",
+    "mean_intensity_g_per_kwh": 616.176,
+    "emissions_kg": 12.324
+  },
+  "window_accuracy": {
+    "forecast_start_hour_local": 11.0,
+    "actual_cleanest_start_hour_local": 13.0,
+    "start_time_error_hours": 2.0,
+    "overlap_hours": 1.0,
+    "overlap_percent": 33.33,
+    "exact_window_match": false,
+    "within_one_hour": false,
+    "within_two_hours": true
+  },
+  "environmental_outcome": {
+    "realised_saving_vs_actual_worst_kg": 3.538,
+    "maximum_possible_saving_vs_actual_worst_kg": 5.701,
+    "carbon_savings_capture_percent": 62.05,
+    "carbon_regret_vs_perfect_hindsight_kg": 2.163,
+    "carbon_regret_vs_perfect_hindsight_percent": 23.96,
+    "realised_saving_vs_immediate_kg": 1.133,
+    "perfect_saving_vs_immediate_kg": 3.296,
+    "cleaner_than_immediate_charging": true,
+    "cleaner_than_daily_average": true
+  },
+  "decision_quality": {
+    "grade": "D",
+    "stars": 2,
+    "label": "Limited",
+    "explanation": "The published recommendation captured 62.1% of the maximum possible carbon saving, with a 2.0-hour start-time error and 33.3% overlap with the actual cleanest window."
+  }
+}
