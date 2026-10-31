@@ -1,7 +1,7 @@
 {
   "status": "success",
-  "update_time_utc": "2026-10-31T19:30:31.699099+00:00",
-  "update_time_local": "2026-11-01T06:30:31.699099+11:00",
+  "update_time_utc": "2026-10-31T22:46:30.256817+00:00",
+  "update_time_local": "2026-11-01T09:46:30.256817+11:00",
   "mode": "incremental update",
   "network": "NEM",
   "network_region": "VIC1",
@@ -9,7 +9,7 @@
   "interval": "1h",
   "fetch_hours_requested": 48,
   "history_days_retained": 90,
-  "latest_fetch_rows": 46,
+  "latest_fetch_rows": 43,
   "history": {
     "rows": 2161,
     "first_timestamp_utc": "2026-08-02T16:00:00+00:00",
