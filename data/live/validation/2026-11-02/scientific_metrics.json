@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "forecast_id": "CCL-20261102",
+  "target_date": "2026-11-02",
+  "evaluation_type": "scientific_accuracy",
+  "expected_hours": 24,
+  "forecast_hours_available": 24,
+  "actual_hours_available": 24,
+  "matched_hours": 24,
+  "data_completeness_percent": 100.0,
+  "mae_g_per_kwh": 52.284,
+  "rmse_g_per_kwh": 71.201,
+  "smape_percent": 6.828,
+  "r2": 0.5627,
+  "mean_error_bias_g_per_kwh": 5.821,
+  "maximum_absolute_error_g_per_kwh": 232.858,
+  "actual_mean_intensity_g_per_kwh": 762.368,
+  "forecast_mean_intensity_g_per_kwh": 768.19,
+  "actual_minimum_intensity_g_per_kwh": 608.009,
+  "actual_maximum_intensity_g_per_kwh": 946.53
+}
