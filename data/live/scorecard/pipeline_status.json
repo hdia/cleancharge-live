@@ -1,9 +1,9 @@
 {
   "status": "success",
   "time_standard": "NEM time (UTC+10)",
-  "started_at_local": "2026-11-06T06:38:13.441900+10:00",
-  "today": "2026-11-06",
-  "yesterday": "2026-11-05",
+  "started_at_local": "2026-11-07T05:56:12.248378+10:00",
+  "today": "2026-11-07",
+  "yesterday": "2026-11-06",
   "steps": {
     "history_update": "success",
     "yesterday_evaluation": "success",
@@ -13,11 +13,11 @@
   "data_availability": {
     "history_file": "/home/runner/work/cleancharge-live/cleancharge-live/data/live/vic_intensity_history.csv",
     "history_available": true,
-    "latest_observation_nem": "2026-11-06T06:00:00+10:00",
-    "data_lag_minutes": 38.3,
+    "latest_observation_nem": "2026-11-07T05:00:00+10:00",
+    "data_lag_minutes": 56.3,
     "previous_day_complete": true,
     "history_rows": 2161
   },
-  "completed_at_local": "2026-11-06T06:39:16.986011+10:00",
-  "duration_seconds": 63.54
+  "completed_at_local": "2026-11-07T05:57:28.424634+10:00",
+  "duration_seconds": 76.18
 }
